@@ -1,6 +1,8 @@
 import { prisma } from '../lib/db';
 
 export default async function OverviewPage() {
+   
+
     // 1. Fetch counts and aggregates
     const customerCount = await prisma.customer.count();
     const invoiceCount = await prisma.invoice.count();
