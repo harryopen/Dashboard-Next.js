@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import NavLinks from './nav-links'
 
 export default function DashboardLayout({
   children,
@@ -14,26 +14,7 @@ export default function DashboardLayout({
           <h2 className="text-xl font-bold mb-8 tracking-tight text-white">
             Dashboard
           </h2>
-          <nav className="flex flex-col gap-2">
-            <Link 
-              href="/dashboard" 
-              className="px-3 py-2 rounded-md hover:bg-zinc-800 transition-colors"
-            >
-              Overview
-            </Link>
-            <Link 
-              href="/dashboard/customer" 
-              className="px-3 py-2 rounded-md hover:bg-zinc-800 transition-colors"
-            >
-              Customers
-            </Link>
-            <Link 
-              href="/dashboard/settings" 
-              className="px-3 py-2 rounded-md hover:bg-zinc-800 transition-colors"
-            >
-              Settings
-            </Link>
-          </nav>
+        <NavLinks/>
         </div>
         
         {/* Footer/User Info inside Sidebar */}

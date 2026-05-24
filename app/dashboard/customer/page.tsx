@@ -3,6 +3,7 @@ import { prisma } from '../../lib/db'
 
 export default async function CustomersPage() {
   // Query all customers from SQLite
+  
   const customers = await prisma.customer.findMany({
     orderBy: { name: 'asc' }
   });
