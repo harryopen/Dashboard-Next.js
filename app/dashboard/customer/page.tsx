@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { prisma } from '../../lib/db'
+import type { Customer } from '@prisma/client';
 
 export default async function CustomersPage() {
   // Query all customers from SQLite
@@ -42,7 +43,7 @@ export default async function CustomersPage() {
             </tr>
           </thead>
           <tbody className="divide-y divide-zinc-200 dark:divide-zinc-800">
-            {customers.map((c) => (
+            {customers.map((c: Customer) => (
               <tr key={c.id} className="hover:bg-zinc-50 dark:hover:bg-zinc-800/30 transition-colors">
                 <td className="p-4 font-semibold">{c.name}</td>
                 <td className="p-4 text-zinc-500 dark:text-zinc-400">{c.email}</td>
