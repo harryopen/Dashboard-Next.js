@@ -1,17 +1,19 @@
-import { PrismaClient } from '@prisma/client';
-import { PrismaBetterSqlite3 } from '@prisma/adapter-better-sqlite3';
+import { PrismaClient } from "@prisma/client";
+import { PrismaBetterSqlite3 } from "@prisma/adapter-better-sqlite3";
 
-// Reuses the client instance in development to prevent connection leaks during hot-reloads
-const globalForPrisma = globalThis as unknown as { prisma?: PrismaClient };
+// Prevent multiple Prisma instances during hot reload in development
+const globalForPrisma = globalThis as unknown as {
+  prisma: PrismaClient | undefined;
+};
 
 const adapter = new PrismaBetterSqlite3({
-  url: 'file:./dev.db',
+  url: process.env.DATABASE_URL!,
 });
 
 export const prisma =
   globalForPrisma.prisma ??
-  new PrismaClient({
-    adapter,
-  });
+  new PrismaClient({ adapter });
 
-if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma;
+if (process.env.NODE_ENV !== "production") {
+  globalForPrisma.prisma = prisma;
+}
