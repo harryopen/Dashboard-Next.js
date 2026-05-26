@@ -1,7 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
 import { auth0 } from "./app/lib/auth0";
 
+export const runtime = "nodejs";
+
 export async function middleware(request: NextRequest) {
+  // Prevent crash if environment variables are not configured yet
+  if (!process.env.AUTH0_DOMAIN || !process.env.AUTH0_CLIENT_ID) {
+    console.warn("⚠️ Auth0 environment variables are not configured. Bypassing middleware.");
+    return NextResponse.next();
+  }
 
   // 1. Let the Auth0 SDK handle its internal routes (/auth/login, /auth/callback, /auth/logout)
   const authRes = await auth0.middleware(request);
